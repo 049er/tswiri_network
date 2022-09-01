@@ -30,12 +30,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  sunbird_base:
+  tswiri_base:
     git:
-      url: https://github.com/TswiriSoftware/sunbird_base.git
+      url: https://github.com/TswiriSoftware/tswiri_base.git
       ref: master # branch name
 
-  sunbird_network:
+  tswiri_network:
     path: ../../
   
 
