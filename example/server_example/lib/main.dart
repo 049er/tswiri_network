@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sunbird_base/theme/theme.dart';
-import 'package:sunbird_network/server/server.dart';
+import 'package:tswiri_base/theme/theme.dart';
+import 'package:tswiri_network/server/server.dart';
 
 WebSocketServer? webSocketServer;
 void main() async {

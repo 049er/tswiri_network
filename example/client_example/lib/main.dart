@@ -3,16 +3,16 @@ import 'package:client_example/views/settings_view.dart';
 import 'package:client_example/views/status_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sunbird_base/theme/theme.dart';
-import 'package:sunbird_base/widgets/navigation_card.dart';
-import 'package:sunbird_network/client/sunbird_client.dart';
+import 'package:tswiri_base/theme/theme.dart';
+import 'package:tswiri_base/widgets/navigation_card.dart';
+import 'package:tswiri_network/client/sunbird_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await loadAppSettings();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => SunbirdClient(
+      create: (context) => AppClient(
         serverIP: serverIP!,
         serverPort: serverPort!,
         username: username!,

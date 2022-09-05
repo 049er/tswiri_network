@@ -3,8 +3,8 @@ import 'package:client_example/settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sunbird_base/widgets/custom_text_field.dart';
-import 'package:sunbird_network/client/sunbird_client.dart';
+import 'package:tswiri_base/widgets/custom_text_field.dart';
+import 'package:tswiri_network/client/sunbird_client.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _SettingsViewState extends State<SettingsView> {
                 username = value;
                 prefs.setString(usernamePref, value);
                 if (mounted) {
-                  Provider.of<SunbirdClient>(context, listen: false)
+                  Provider.of<AppClient>(context, listen: false)
                       .setUsername(username!);
                 }
 
@@ -78,7 +78,7 @@ class _SettingsViewState extends State<SettingsView> {
                 serverIP = value;
                 prefs.setString(serverIPPref, value);
                 if (mounted) {
-                  Provider.of<SunbirdClient>(context, listen: false)
+                  Provider.of<AppClient>(context, listen: false)
                       .setServerIP(serverIP!);
                 }
                 setState(() {});
@@ -98,7 +98,7 @@ class _SettingsViewState extends State<SettingsView> {
                   prefs.setInt(serverPortPref, serverPort!);
 
                   if (mounted) {
-                    Provider.of<SunbirdClient>(context, listen: false)
+                    Provider.of<AppClient>(context, listen: false)
                         .setServerPort(serverPort!);
                   }
                 }

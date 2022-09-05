@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tswiri_network/commands/client_commands.dart';
 
 ///This client is used on device.
-class SunbirdClient with ChangeNotifier {
+class AppClient with ChangeNotifier {
   ///The server's IP adress.
   String? serverIP;
 
@@ -26,7 +26,7 @@ class SunbirdClient with ChangeNotifier {
   ///Has this session been authenticated.
   bool? authenticated;
 
-  SunbirdClient({
+  AppClient({
     required this.serverIP,
     required this.serverPort,
     required this.username,

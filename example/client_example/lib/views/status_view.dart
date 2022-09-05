@@ -1,7 +1,7 @@
 import 'package:client_example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sunbird_network/client/sunbird_client.dart';
+import 'package:tswiri_network/client/sunbird_client.dart';
 
 class StatusView extends StatefulWidget {
   const StatusView({Key? key}) : super(key: key);
@@ -58,7 +58,7 @@ class _StatusViewState extends State<StatusView> {
         'Server Status',
         style: Theme.of(context).textTheme.bodyMedium,
       ),
-      subtitle: Consumer<SunbirdClient>(
+      subtitle: Consumer<AppClient>(
         builder: ((context, client, child) {
           return Text(
             client.socket?.port.toString() ?? 'Not Connected',
@@ -76,7 +76,7 @@ class _StatusViewState extends State<StatusView> {
         'Server IP',
         style: Theme.of(context).textTheme.bodyMedium,
       ),
-      subtitle: Consumer<SunbirdClient>(
+      subtitle: Consumer<AppClient>(
         builder: ((context, client, child) {
           return Text(
             client.socket?.address.address ?? 'Not Connected',

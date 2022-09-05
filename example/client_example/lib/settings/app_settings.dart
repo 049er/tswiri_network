@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sunbird_network/client/device_uid.dart';
+import 'package:tswiri_network/client/device_uid.dart';
 
 ///Server IP adress.
 String? serverIP;
