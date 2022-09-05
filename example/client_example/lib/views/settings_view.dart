@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tswiri_base/widgets/custom_text_field.dart';
-import 'package:tswiri_network/client/sunbird_client.dart';
+import 'package:tswiri_network/client/app_client.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);

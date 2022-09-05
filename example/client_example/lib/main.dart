@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tswiri_base/theme/theme.dart';
 import 'package:tswiri_base/widgets/navigation_card.dart';
-import 'package:tswiri_network/client/sunbird_client.dart';
+import 'package:tswiri_network/client/app_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
