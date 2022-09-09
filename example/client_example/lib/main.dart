@@ -1,22 +1,27 @@
-import 'package:client_example/settings/app_settings.dart';
-import 'package:client_example/views/settings_view.dart';
-import 'package:client_example/views/status_view.dart';
+import 'package:camera/camera.dart';
+import 'package:client_example/views/status/status_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tswiri_base/theme/theme.dart';
-import 'package:tswiri_base/widgets/navigation_card.dart';
-import 'package:tswiri_network/client/app_client.dart';
+import 'package:tswiri_base/widgets/general/navigation_card.dart';
+import 'package:tswiri_network/client/client_settings.dart';
+import 'package:tswiri_network/client/tswiri_client_mobile.dart';
+
+List<CameraDescription> cameras = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   await loadAppSettings();
+
   runApp(
     ChangeNotifierProvider(
-      create: (context) => AppClient(
-        serverIP: serverIP!,
-        serverPort: serverPort!,
-        username: username!,
-        deviceUID: deviceUID!,
+      create: (context) => TswiriClientMobile(
+        deviceUID: deviceUID,
+        serverIP: serverIP,
+        serverPort: serverPort,
+        username: username,
+        uniqueKey: uniqueKey,
       ),
       child: const MyApp(),
     ),
@@ -29,8 +34,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sunbird Client',
-      theme: sunbirdTheme,
+      title: 'Tswiri Client',
+      theme: tswiriTheme,
       home: const MyHomePage(),
     );
   }
@@ -51,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<TswiriClientMobile>(context).connectToServer();
     return Scaffold(
       appBar: _appBar(),
       body: _body(),
@@ -77,11 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icons.stacked_line_chart_sharp,
             viewPage: StatusView(),
           ),
-          NavigationCard(
-            label: 'Settings',
-            icon: Icons.settings,
-            viewPage: SettingsView(),
-          ),
+          // NavigationCard(
+          //   label: 'Settings',
+          //   icon: Icons.settings,
+          //   viewPage: SettingsView(),
+          // ),
         ],
       ),
     );

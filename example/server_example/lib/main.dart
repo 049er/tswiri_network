@@ -1,16 +1,25 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:server_example/views/connect/connect_view.dart';
+import 'package:server_example/views/devices/devices_view.dart';
 import 'package:tswiri_base/theme/theme.dart';
 import 'package:tswiri_network/server/server.dart';
 
 WebSocketServer? webSocketServer;
 void main() async {
-  webSocketServer = WebSocketServer(
-    serverSocket: await startServer(
-      ip: '192.168.1.111',
-      port: 8080,
+  ServerSocket serverSocket = await startServer(
+    ip: '192.168.1.111',
+    port: 8080,
+  );
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => WebSocketServer(serverSocket: serverSocket),
+      child: const MyApp(),
     ),
   );
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +27,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sunbird Server',
-      theme: sunbirdTheme,
+      title: 'Tswiri Server',
+      theme: tswiriTheme,
       home: const MyHomePage(),
     );
   }
@@ -33,6 +42,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+  NavigationRailLabelType labelType = NavigationRailLabelType.all;
+
+  List<Widget> views = [
+    const DevicesView(),
+    const ConnectView(),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -41,26 +58,38 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appBar(),
       body: _body(),
     );
   }
 
-  AppBar _appBar() {
-    return AppBar(
-      title: Text(
-        'Server',
-        style: Theme.of(context).textTheme.titleMedium,
-      ),
-      centerTitle: true,
-    );
-  }
-
   Widget _body() {
-    return Center(
-      child: Column(
-        children: [],
-      ),
+    return Row(
+      children: [
+        NavigationRail(
+          selectedIndex: _selectedIndex,
+          groupAlignment: -1,
+          onDestinationSelected: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          labelType: labelType,
+          destinations: const <NavigationRailDestination>[
+            NavigationRailDestination(
+              icon: Icon(Icons.device_hub_sharp),
+              selectedIcon: Icon(Icons.device_hub_sharp),
+              label: Text('Devices'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.qr_code),
+              selectedIcon: Icon(Icons.qr_code),
+              label: Text('Connect'),
+            ),
+          ],
+        ),
+        const VerticalDivider(thickness: 1, width: 1),
+        views[_selectedIndex],
+      ],
     );
   }
 }

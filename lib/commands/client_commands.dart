@@ -5,6 +5,7 @@ void sendDeviceInfo(
   Socket socket, {
   required String deviceUID,
   required String username,
+  required String? key,
 }) {
-  socket.write('device_info, $deviceUID, $username');
+  socket.write('device_info, $deviceUID, $username, $key');
 }

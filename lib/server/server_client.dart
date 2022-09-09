@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:tswiri_network/commands/server_commands.dart';
 import 'package:tswiri_network/server/server.dart';
 
 ///This client is used serverside.
@@ -18,28 +19,29 @@ class ServerClient {
   ///Reference to the webSocketServer.
   WebSocketServer webSocketServer;
 
-  ///Device verified.
-  bool? verified;
-
-  ///Session authenticated.
-  bool? authenticated;
-
   ///Device's username.
   String? username;
 
   ///Device's UID.
   String? deviceUID;
 
+  ///Device's key.
+  String? key;
+
   ServerClient(Socket s, {required this.webSocketServer}) {
     _socket = s;
     _address = _socket.remoteAddress.address;
     _port = _socket.remotePort;
 
+    //Add listener.
     _socket.listen(
       messageHandler,
       onError: errorHandler,
       onDone: finishedHandler,
     );
+
+    //Request device info.
+    requestDeviceInfo(_socket);
   }
 
   void messageHandler(Uint8List data) {
@@ -51,6 +53,16 @@ class ServerClient {
         log(command.toString(), name: 'device_info');
         deviceUID = command[1];
         username = command[2];
+        key = command[3];
+
+        ///TODO:
+        ///1. check if deviceUID is present in database.
+        ///   check if the key matches stored key.
+        ///
+        ///else:
+        ///
+        ///2. check if sent key mathces server temporaryKey
+        ///
 
         break;
       case 'authenticate':
