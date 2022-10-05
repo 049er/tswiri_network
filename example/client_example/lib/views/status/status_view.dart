@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:client_example/views/qr_code_scanner/qr_code_scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_base/colors/colors.dart';
 import 'package:tswiri_network/client/tswiri_client_mobile.dart';
 import 'package:tswiri_network/model/qr_code.dart';
+import 'package:tswiri_widgets/colors/colors.dart';
 
 class StatusView extends StatefulWidget {
   const StatusView({Key? key}) : super(key: key);

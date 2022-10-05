@@ -31,9 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  tswiri_base:
+  tswiri_widgets:
     git:
-      url: https://github.com/TswiriSoftware/tswiri_base.git
+      url: https://github.com/TswiriSoftware/tswiri_widgets.git
       ref: master 
 
   tswiri_network:

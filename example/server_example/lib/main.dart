@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:server_example/views/connect/connect_view.dart';
 import 'package:server_example/views/devices/devices_view.dart';
-import 'package:tswiri_base/theme/theme.dart';
 import 'package:tswiri_network/server/server.dart';
+import 'package:tswiri_widgets/theme/theme.dart';
 
 WebSocketServer? webSocketServer;
 void main() async {

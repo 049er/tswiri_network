@@ -19,11 +19,6 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 
-  tswiri_base:
-    git:
-      url: https://github.com/TswiriSoftware/tswiri_base.git
-      ref: master 
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

@@ -1,9 +1,9 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_base/colors/colors.dart';
 import 'package:tswiri_network/model/qr_code.dart';
 import 'package:tswiri_network/server/server.dart';
+import 'package:tswiri_widgets/colors/colors.dart';
 
 class ConnectView extends StatefulWidget {
   const ConnectView({Key? key}) : super(key: key);

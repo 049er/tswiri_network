@@ -2,10 +2,11 @@ import 'package:camera/camera.dart';
 import 'package:client_example/views/status/status_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_base/theme/theme.dart';
-import 'package:tswiri_base/widgets/general/navigation_card.dart';
+
 import 'package:tswiri_network/client/client_settings.dart';
 import 'package:tswiri_network/client/tswiri_client_mobile.dart';
+import 'package:tswiri_widgets/theme/theme.dart';
+import 'package:tswiri_widgets/widgets/general/navigation_card.dart';
 
 List<CameraDescription> cameras = [];
 
