@@ -43,6 +43,7 @@ class TswiriClientMobile with ChangeNotifier {
     log(serverIP.toString(), name: 'serverIP');
     log(serverPort.toString(), name: 'serverPort');
     log(uniqueKey.toString(), name: 'uniqueKey');
+    log(username.toString(), name: 'username');
 
     log('attempting to connect.');
     if (socket == null &&
@@ -145,5 +146,10 @@ class TswiriClientMobile with ChangeNotifier {
       socket!.close();
       socket = null;
     }
+  }
+
+  ///Change the username of this device.
+  void changeUsername(String newUsername) {
+    username = newUsername;
   }
 }

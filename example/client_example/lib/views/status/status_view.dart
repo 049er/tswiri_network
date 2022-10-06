@@ -78,10 +78,17 @@ class _StatusViewState extends State<StatusView> {
       ),
       subtitle: Consumer<TswiriClientMobile>(
         builder: ((context, client, child) {
-          return Text(
-            client.socket?.port.toString() ?? 'Not Connected',
-            style: Theme.of(context).textTheme.bodySmall,
-          );
+          if (client.socket?.port.toString() == null) {
+            return Text(
+              'Not Connected',
+              style: Theme.of(context).textTheme.bodySmall,
+            );
+          } else {
+            return Text(
+              'Connected',
+              style: Theme.of(context).textTheme.bodySmall,
+            );
+          }
         }),
       ),
       trailing: Provider.of<TswiriClientMobile>(context).isConnected()

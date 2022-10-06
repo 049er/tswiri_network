@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:client_example/views/settings/settings_view.dart';
 import 'package:client_example/views/status/status_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,15 @@ class _MyHomePageState extends State<MyHomePage> {
         style: Theme.of(context).textTheme.titleMedium,
       ),
       centerTitle: true,
+      actions: [
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const SettingsView()));
+          },
+          icon: const Icon(Icons.settings),
+        ),
+      ],
     );
   }
 

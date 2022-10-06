@@ -16,6 +16,11 @@ class _ConnectViewState extends State<ConnectView> {
   bool _isAddingDevice = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
