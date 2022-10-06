@@ -1,10 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/widgets.dart';
-import 'package:tswiri_network/commands/server_commands.dart';
 import 'package:tswiri_network/scripts/server_key.dart';
-
 import 'server_client.dart';
 
 Future<ServerSocket> startServer(
@@ -40,6 +37,8 @@ class WebSocketServer with ChangeNotifier {
     clients.add(
       ServerClient(client, webSocketServer: this),
     );
+
+    notifyListeners();
   }
 
   ///Distribute the message to all clients.
@@ -54,6 +53,7 @@ class WebSocketServer with ChangeNotifier {
   ///Remove the specified client.
   void removeClient(ServerClient client) {
     clients.remove(client);
+    notifyListeners();
   }
 
   ///Create a new temporary key for a single new device.
