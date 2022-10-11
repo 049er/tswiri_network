@@ -32,13 +32,21 @@ dependencies:
   flutter:
     sdk: flutter
   
+  #widgets
   tswiri_widgets:
     git:
       url: https://github.com/TswiriSoftware/tswiri_widgets.git
       ref: master 
 
+  #Network related
   tswiri_network_websocket:
     path: ../../
+
+  #Database
+  tswiri_database:
+    git:
+      url: https://github.com/TswiriSoftware/tswiri_database.git
+      ref: master 
 
 
   # The following adds the Cupertino Icons font to your application.
