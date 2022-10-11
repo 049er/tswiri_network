@@ -1,91 +1,111 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
+import 'package:tswiri_network_websocket/communication/communication.dart';
+import 'package:tswiri_network_websocket/server/server.dart';
+import 'package:tswiri_network_websocket/server/websocket_server.dart';
 
-import 'package:tswiri_network/commands/server_commands.dart';
-import 'package:tswiri_network/server/server.dart';
+class ServerClient with ChangeNotifier {
+  ServerClient({
+    required this.serverManager,
+    required this.session,
+    required this.ws,
+    required this.username,
+  }) : communication = Communication(ws: ws) {
+    log(username, name: 'Added Client');
 
-///This client is used serverside.
-class ServerClient {
-  ///Socket.
-  late Socket _socket;
+    ///Request device_uid.
+    communication.requestDeviceUID();
 
-  ///Adress.
-  late String _address;
-
-  ///Port.
-  late int _port;
-
-  ///Reference to the webSocketServer.
-  WebSocketServer webSocketServer;
-
-  ///Device's username.
-  String? username;
-
-  ///Device's UID.
-  String? deviceUID;
-
-  ///Device's key.
-  String? key;
-
-  ServerClient(Socket s, {required this.webSocketServer}) {
-    _socket = s;
-    _address = _socket.remoteAddress.address;
-    _port = _socket.remotePort;
-
-    //Add listener.
-    _socket.listen(
-      messageHandler,
-      onError: errorHandler,
-      onDone: finishedHandler,
+    ///Listen :D
+    ws.listen(
+      (event) => _handleEvent(event),
+      onError: (error) => _onError(error),
+      onDone: () => _onDone(),
     );
-
-    //Request device info.
-    requestDeviceInfo(_socket);
   }
 
-  void messageHandler(Uint8List data) {
-    String message = String.fromCharCodes(data).trim();
-    log(message.toString());
-    List command = message.split(',').toList();
-    switch (command[0]) {
-      case 'device_info':
-        log(command.toString(), name: 'device_info');
-        deviceUID = command[1];
-        username = command[2];
-        key = command[3];
+  ///Reference to desktop server.
+  WsManager serverManager;
 
-        ///TODO:
-        ///1. check if deviceUID is present in database.
-        ///   check if the key matches stored key.
-        ///
-        ///else:
-        ///
-        ///2. check if sent key mathces server temporaryKey
-        ///
+  ///HttpSession.
+  HttpSession session;
 
+  ///Websocket.
+  WebSocket ws;
+
+  ///Client name.
+  String username;
+
+  ///The devices UID;
+  String? deviceUID;
+
+  ///Communication class.
+  Communication communication;
+
+  ///Client registered.
+  bool registered = false;
+
+  ///Client authenticated.
+  bool authenticated = false;
+
+  ///Handle message.
+  _handleEvent(event) {
+    List data = List.from(json.decode(event));
+    String identifier = data[0];
+
+    switch (identifier) {
+      case 'request':
+        _handleRequest(data);
         break;
-      case 'authenticate':
+      case 'post':
+        _handlePost(data);
         break;
       default:
-        log(command.toString());
-        break;
     }
   }
 
-  void errorHandler(error) {
-    log('$_address:$_port Error: $error');
-    webSocketServer.removeClient(this);
-    _socket.close();
+  _handleRequest(List data) {
+    String request = data[1];
+    log(' $request', name: 'Handle Request');
+
+    switch (request) {
+      case '':
+        break;
+      default:
+    }
   }
 
-  void finishedHandler() {
-    log('$_address:$_port Disconnected');
-    webSocketServer.removeClient(this);
-    _socket.close();
+  _handlePost(List data) {
+    String post = data[1];
+    log(' $post : ${data[2]}', name: 'Handle Post');
+
+    switch (post) {
+      case 'device_uid':
+        deviceUID = data[2];
+        serverManager.update();
+        break;
+      case 'new_device_uid':
+        deviceUID = data[2];
+        String tempKey = data[3];
+
+        if (serverManager.tempKey != null && tempKey == serverManager.tempKey) {
+          serverManager.clearTemporaryKey();
+        }
+
+        serverManager.update();
+        break;
+      default:
+    }
   }
 
-  void write(String message) {
-    _socket.write(message);
+  _onError(error) {
+    log(error);
+    serverManager.removeClient(this);
+  }
+
+  _onDone() {
+    serverManager.removeClient(this);
   }
 }
