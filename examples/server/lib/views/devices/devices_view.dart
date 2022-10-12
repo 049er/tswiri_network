@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_network/server/server_client.dart';
+import 'package:tswiri_network/server/websocket_client.dart';
 import 'package:tswiri_network/server/websocket_server.dart';
 import 'package:tswiri_widgets/colors/colors.dart';
 

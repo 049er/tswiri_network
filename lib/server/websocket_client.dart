@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:tswiri_network/communication/communication.dart';
-import 'package:tswiri_network/server/server.dart';
 import 'package:tswiri_network/server/websocket_server.dart';
 
 class ServerClient with ChangeNotifier {
@@ -95,6 +94,10 @@ class ServerClient with ChangeNotifier {
         }
 
         serverManager.update();
+        break;
+      case 'container':
+        String json = data[2];
+
         break;
       default:
     }

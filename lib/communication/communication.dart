@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+///Add any websocket communication here.
 class Communication {
   Communication({
     required this.ws,
@@ -37,5 +38,11 @@ class Communication {
   postInvalidAuthentication() {
     log('Authenticated D;', name: 'Send Post');
     ws.add(json.encode(['post', 'auth', 'false']));
+  }
+
+  ///Send a container to server. (client)
+  postContainer(String data) {
+    log('Authenticated D;', name: 'Send Post');
+    ws.add(json.encode(['post', 'container', data]));
   }
 }

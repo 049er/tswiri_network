@@ -8,7 +8,6 @@ import 'package:tswiri_database/desktop_database.dart';
 import 'package:tswiri_database/export.dart';
 import 'package:tswiri_database/functions/isar/create_functions.dart';
 import 'package:tswiri_database/models/settings/desktop_settings.dart';
-import 'package:tswiri_database/test_functions/populate_database.dart';
 import 'package:tswiri_network/scripts/get_device_ip.dart';
 import 'package:tswiri_network/server/shelf_server.dart';
 import 'package:tswiri_network/server/websocket_server.dart';
@@ -31,7 +30,7 @@ void main() async {
 
   //Populate the database for testing.
   createBasicContainerTypes();
-  populateDatabase();
+  // populateDatabase();
 
   runApp(
     MultiProvider(

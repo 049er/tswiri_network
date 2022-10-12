@@ -45,6 +45,7 @@ class PhotoPushViewState extends State<PhotoPushView> {
           ElevatedButton(
             onPressed: () async {
               File imageFile = await getImageFileFromAssets('4.jpg');
+
               var request = http.MultipartRequest(
                 'POST',
                 Uri.parse('http://192.168.68.137:8085/upload'),

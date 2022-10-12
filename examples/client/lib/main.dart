@@ -1,10 +1,17 @@
 import 'package:camera/camera.dart';
 import 'package:client/views/photo_push/photo_push_view.dart';
 import 'package:client/views/photo_view/photo_view.dart';
+import 'package:client/views/send_container/send_container_view.dart';
 import 'package:client/views/settings/settigns_view.dart';
 import 'package:client/views/status/status_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tswiri_database/export.dart';
+import 'package:tswiri_database/functions/isar/create_functions.dart';
+import 'package:tswiri_database/mobile_database.dart';
+import 'package:tswiri_database/models/settings/app_settings.dart';
+import 'package:tswiri_database/test_functions/populate_database.dart';
 import 'package:tswiri_network/client/client.dart';
 import 'package:tswiri_widgets/theme/theme.dart';
 import 'package:tswiri_network/client/client_settings.dart';
@@ -15,7 +22,26 @@ List<CameraDescription> cameras = [];
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
+  await loadAppNetworkSettings();
+
+  //Load app settings.
   await loadAppSettings();
+
+  //Initiate Isar Storage Directories.
+  await initiateSpaceDirectory();
+  await initiatePhotoStorage();
+
+  //Initiate Isar.
+  isar = initiateMobileIsar();
+  createBasicContainerTypes();
+
+  //Test population :L
+  populateDatabase();
+
+  //Force portraitUp.
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   runApp(
     ChangeNotifierProvider(
@@ -127,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisCount: 2,
         children: const [
           NavigationCard(
-            label: 'Photos',
+            label: 'Photo View',
             icon: Icons.photo,
             viewPage: PhotoView(),
           ),
@@ -135,6 +161,11 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Photos Push',
             icon: Icons.photo,
             viewPage: PhotoPushView(),
+          ),
+          NavigationCard(
+            label: 'Send Data',
+            icon: Icons.data_array,
+            viewPage: SendContainerView(),
           ),
         ],
       ),
