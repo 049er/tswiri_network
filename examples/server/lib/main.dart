@@ -1,15 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:server/views/database/database_view.dart';
 import 'package:server/views/devices/devices_view.dart';
 import 'package:server/views/qr_code/qr_code_view.dart';
 import 'package:server/views/settings/settings_view.dart';
-import 'package:tswiri_network_websocket/scripts/get_device_ip.dart';
-import 'package:tswiri_network_websocket/server/shelf_server.dart';
-import 'package:tswiri_network_websocket/server/websocket_server.dart';
+import 'package:tswiri_database/desktop_database.dart';
+import 'package:tswiri_database/export.dart';
+import 'package:tswiri_database/functions/isar/create_functions.dart';
+import 'package:tswiri_database/models/settings/desktop_settings.dart';
+import 'package:tswiri_database/test_functions/populate_database.dart';
+import 'package:tswiri_network/scripts/get_device_ip.dart';
+import 'package:tswiri_network/server/shelf_server.dart';
+import 'package:tswiri_network/server/websocket_server.dart';
 import 'package:tswiri_widgets/theme/theme.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   String? ip = await getDeviceIP();
+
+  //Load desktop settings.
+  await loadDesktopSettings();
+
+  //Initiate Isar Storage Directories.
+  await initiateSpaceDirectory();
+  await initiatePhotoStorage();
+  await initiateThumnailStorage();
+
+  //Initiate Isar.
+  isar = initiateDesktopIsar();
+
+  //Populate the database for testing.
+  createBasicContainerTypes();
+  populateDatabase();
 
   runApp(
     MultiProvider(
@@ -48,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> views = [
     const DevicesView(),
     const QrCodeView(),
-    const SettingsView()
+    const SettingsView(),
+    const DatabaseView(),
   ];
 
   @override
@@ -89,9 +112,14 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text('QR Code'),
             ),
             NavigationRailDestination(
-              icon: Icon(Icons.qr_code),
+              icon: Icon(Icons.settings),
               selectedIcon: Icon(Icons.settings),
               label: Text('Settings'),
+            ),
+            NavigationRailDestination(
+              icon: Icon(Icons.data_array),
+              selectedIcon: Icon(Icons.data_array),
+              label: Text('Database'),
             ),
           ],
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_network_websocket/server/server.dart';
-import 'package:tswiri_network_websocket/server/shelf_server.dart';
-import 'package:tswiri_network_websocket/server/websocket_server.dart';
+import 'package:tswiri_network/server/server.dart';
+import 'package:tswiri_network/server/shelf_server.dart';
+import 'package:tswiri_network/server/websocket_server.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);

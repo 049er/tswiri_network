@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:tswiri_network_websocket/communication/communication.dart';
-import 'package:tswiri_network_websocket/server/server.dart';
-import 'package:tswiri_network_websocket/server/websocket_server.dart';
+import 'package:tswiri_network/communication/communication.dart';
+import 'package:tswiri_network/server/server.dart';
+import 'package:tswiri_network/server/websocket_server.dart';
 
 class ServerClient with ChangeNotifier {
   ServerClient({

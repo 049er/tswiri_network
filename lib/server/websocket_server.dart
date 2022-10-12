@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:tswiri_network_websocket/scripts/server_key.dart';
-import 'package:tswiri_network_websocket/server/server_client.dart';
+import 'package:tswiri_network/scripts/server_key.dart';
+import 'package:tswiri_network/server/server_client.dart';
 
 class WsManager with ChangeNotifier {
   WsManager({

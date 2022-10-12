@@ -5,8 +5,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tswiri_network_websocket/client/client_settings.dart';
-import 'package:tswiri_network_websocket/communication/communication.dart';
+import 'package:tswiri_network/client/client_settings.dart';
+import 'package:tswiri_network/communication/communication.dart';
 
 import '../model/qr_code.dart';
 

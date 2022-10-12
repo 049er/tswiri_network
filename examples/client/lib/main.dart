@@ -5,9 +5,9 @@ import 'package:client/views/settings/settigns_view.dart';
 import 'package:client/views/status/status_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_network_websocket/client/client.dart';
+import 'package:tswiri_network/client/client.dart';
 import 'package:tswiri_widgets/theme/theme.dart';
-import 'package:tswiri_network_websocket/client/client_settings.dart';
+import 'package:tswiri_network/client/client_settings.dart';
 import 'package:tswiri_widgets/widgets/general/navigation_card.dart';
 
 List<CameraDescription> cameras = [];

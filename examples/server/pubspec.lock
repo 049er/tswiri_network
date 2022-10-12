@@ -639,7 +639,7 @@ packages:
       url: "https://github.com/TswiriSoftware/tswiri_database.git"
     source: git
     version: "0.0.1"
-  tswiri_network_websocket:
+  tswiri_network:
     dependency: "direct main"
     description:
       path: "../.."

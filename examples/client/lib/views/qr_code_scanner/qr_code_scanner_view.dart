@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:client/views/qr_code_scanner/qr_code_detector_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_barcode_scanning/google_mlkit_barcode_scanning.dart';
-import 'package:tswiri_network_websocket/model/qr_code.dart';
+import 'package:tswiri_network/model/qr_code.dart';
 
 import 'camera_view.dart';
 

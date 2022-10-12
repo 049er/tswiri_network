@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:tswiri_network_websocket/server/router.dart';
+import 'package:tswiri_network/server/router.dart';
 import 'package:shelf/shelf.dart';
 
 class ShelfManager with ChangeNotifier {
