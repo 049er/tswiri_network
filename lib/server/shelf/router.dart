@@ -1,11 +1,9 @@
 import 'dart:developer';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 import 'dart:io';
-import 'package:shelf_static/shelf_static.dart' as shelf_static;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 

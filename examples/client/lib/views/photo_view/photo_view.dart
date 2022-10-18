@@ -32,7 +32,7 @@ class PhotoViewState extends State<PhotoView> {
     );
   }
 
-  TextEditingController _controller = TextEditingController();
+  // TextEditingController _controller = TextEditingController();
 
   Widget _body() {
     return SingleChildScrollView(

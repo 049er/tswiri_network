@@ -70,8 +70,10 @@ class SettignsViewState extends State<SettignsView> {
     );
   }
 
-  TextEditingController _textEditingControllerIP = TextEditingController();
-  TextEditingController _textEditingControllerPort = TextEditingController();
+  final TextEditingController _textEditingControllerIP =
+      TextEditingController();
+  final TextEditingController _textEditingControllerPort =
+      TextEditingController();
 
   Widget _serverTile() {
     return Card(
@@ -153,7 +155,7 @@ class SettignsViewState extends State<SettignsView> {
                     ),
                   );
 
-                  if (qrCodeConnect != null) {
+                  if (qrCodeConnect != null && mounted) {
                     Provider.of<MobileClient>(context, listen: false)
                         .connectWithQRCode(qrCodeConnect);
 

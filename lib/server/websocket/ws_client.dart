@@ -3,10 +3,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:tswiri_database/export.dart';
-import 'package:tswiri_network/events/database_sync.dart';
 import 'package:tswiri_network/events/events.dart';
 import 'package:tswiri_network/server/websocket/ws_manager.dart';
-import 'package:tswiri_network/communication/communication.dart';
 
 class WsClient with ChangeNotifier {
   WsClient({

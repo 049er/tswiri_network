@@ -14,7 +14,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.1"
+    version: "3.3.2"
   async:
     dependency: transitive
     description:
@@ -105,7 +105,7 @@ packages:
       name: convert
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.1"
   cross_file:
     dependency: transitive
     description:
@@ -288,14 +288,14 @@ packages:
       name: http_parser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.0.2"
   image:
     dependency: transitive
     description:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "3.2.2"
   intl:
     dependency: transitive
     description:
@@ -505,7 +505,7 @@ packages:
       name: shared_preferences_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.13"
+    version: "2.0.14"
   shared_preferences_ios:
     dependency: transitive
     description:
@@ -633,17 +633,9 @@ packages:
   tswiri_database:
     dependency: "direct main"
     description:
-<<<<<<< HEAD
       path: "../../../.."
       relative: true
     source: path
-=======
-      path: "."
-      ref: master
-      resolved-ref: "15f9fb58ff34e366f72d73bd21526e6150957297"
-      url: "https://github.com/TswiriSoftware/tswiri_database.git"
-    source: git
->>>>>>> 1124af3375bfc2e13c920547198149d8a5302a39
     version: "0.0.1"
   tswiri_network:
     dependency: "direct main"
