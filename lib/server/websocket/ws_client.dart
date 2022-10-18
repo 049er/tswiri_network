@@ -2,15 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-<<<<<<<< HEAD:lib/server/websocket/ws_client.dart
 import 'package:tswiri_database/export.dart';
 import 'package:tswiri_network/events/database_sync.dart';
 import 'package:tswiri_network/events/events.dart';
 import 'package:tswiri_network/server/websocket/ws_manager.dart';
-========
 import 'package:tswiri_network/communication/communication.dart';
-import 'package:tswiri_network/server/websocket_server.dart';
->>>>>>>> 1124af3375bfc2e13c920547198149d8a5302a39:lib/server/websocket_client.dart
 
 class WsClient with ChangeNotifier {
   WsClient({
@@ -105,10 +101,10 @@ class WsClient with ChangeNotifier {
         // databaseSync.databaseHashesFromJson(json);
 
         break;
-      case 'container':
-        String json = data[2];
+      // case Post.deviceUID:
+      //   String json = data[2];
 
-        break;
+      //   break;
       default:
     }
   }
