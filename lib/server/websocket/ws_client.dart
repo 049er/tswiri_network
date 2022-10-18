@@ -2,21 +2,23 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:tswiri_network/communication/communication.dart';
-import 'package:tswiri_network/server/server.dart';
-import 'package:tswiri_network/server/websocket_server.dart';
+import 'package:tswiri_database/export.dart';
+import 'package:tswiri_network/events/database_sync.dart';
+import 'package:tswiri_network/events/events.dart';
+import 'package:tswiri_network/server/websocket/ws_manager.dart';
 
-class ServerClient with ChangeNotifier {
-  ServerClient({
+class WsClient with ChangeNotifier {
+  WsClient({
     required this.serverManager,
-    required this.session,
+    required this.isar,
+    required this.httpSession,
     required this.ws,
     required this.username,
-  }) : communication = Communication(ws: ws) {
+  }) : events = Events(ws: ws) {
     log(username, name: 'Added Client');
 
     ///Request device_uid.
-    communication.requestDeviceUID();
+    events.request(Request.requestDeviceUID);
 
     ///Listen :D
     ws.listen(
@@ -30,10 +32,13 @@ class ServerClient with ChangeNotifier {
   WsManager serverManager;
 
   ///HttpSession.
-  HttpSession session;
+  HttpSession httpSession;
 
   ///Websocket.
   WebSocket ws;
+
+  ///Isar reference.
+  Isar isar;
 
   ///Client name.
   String username;
@@ -41,8 +46,8 @@ class ServerClient with ChangeNotifier {
   ///The devices UID;
   String? deviceUID;
 
-  ///Communication class.
-  Communication communication;
+  ///Used to send requests.
+  Events events;
 
   ///Client registered.
   bool registered = false;
@@ -67,37 +72,52 @@ class ServerClient with ChangeNotifier {
   }
 
   _handleRequest(List data) {
-    String request = data[1];
+    Request? request = identifyRequest(data[1]);
     log(' $request', name: 'Handle Request');
 
     switch (request) {
-      case '':
+      case Request.databaseInfo:
+        events.postDatabaseInfo(isar);
         break;
       default:
     }
   }
 
   _handlePost(List data) {
-    String post = data[1];
+    Post? post = identifyPost(data[1]);
     log(' $post : ${data[2]}', name: 'Handle Post');
 
     switch (post) {
-      case 'device_uid':
-        deviceUID = data[2];
-        serverManager.update();
+      case Post.deviceUID:
+        _handleDeviceUID(data);
         break;
-      case 'new_device_uid':
-        deviceUID = data[2];
-        String tempKey = data[3];
+      case Post.newDeviceUID:
+        _handleNewDeviceUID(data);
+        break;
+      case Post.databaseInfo:
+        String json = data[2];
+        // DatabaseSync databaseSync = DatabaseSync(isar: isar);
+        // databaseSync.databaseHashesFromJson(json);
 
-        if (serverManager.tempKey != null && tempKey == serverManager.tempKey) {
-          serverManager.clearTemporaryKey();
-        }
-
-        serverManager.update();
         break;
       default:
     }
+  }
+
+  void _handleNewDeviceUID(List<dynamic> data) {
+    deviceUID = data[2];
+    String tempKey = data[3];
+    if (serverManager.tempKey != null && tempKey == serverManager.tempKey) {
+      serverManager.clearTemporaryKey();
+    }
+    serverManager.update();
+    // events.request(Request.databaseInfo);
+  }
+
+  void _handleDeviceUID(List<dynamic> data) {
+    deviceUID = data[2];
+    serverManager.update();
+    events.request(Request.databaseInfo);
   }
 
   _onError(error) {

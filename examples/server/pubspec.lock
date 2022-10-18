@@ -633,11 +633,9 @@ packages:
   tswiri_database:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "9156394d5594f3e5cd6f0d66fe088fac90a1e4c1"
-      url: "https://github.com/TswiriSoftware/tswiri_database.git"
-    source: git
+      path: "../../../.."
+      relative: true
+    source: path
     version: "0.0.1"
   tswiri_network:
     dependency: "direct main"
@@ -649,11 +647,9 @@ packages:
   tswiri_widgets:
     dependency: "direct main"
     description:
-      path: "."
-      ref: master
-      resolved-ref: "368e7936e433480913c5b1d422adba69aefaba34"
-      url: "https://github.com/TswiriSoftware/tswiri_widgets.git"
-    source: git
+      path: "../../../tswiri_widgets"
+      relative: true
+    source: path
     version: "0.0.1"
   typed_data:
     dependency: transitive

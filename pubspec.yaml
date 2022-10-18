@@ -1,6 +1,7 @@
 name: tswiri_network
 description: A new Flutter package project.
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -17,6 +18,10 @@ dependencies:
   shelf_router: ^1.1.3
   shelf_static: ^1.1.1
   path_provider: ^2.0.11
+
+  tswiri_database:
+    path: ../../
+
 
 dev_dependencies:
   flutter_test:

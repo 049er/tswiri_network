@@ -3,14 +3,20 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:tswiri_database/export.dart';
 import 'package:tswiri_network/scripts/server_key.dart';
-import 'package:tswiri_network/server/server_client.dart';
+import 'package:tswiri_network/server/websocket/ws_client.dart';
 
 class WsManager with ChangeNotifier {
   WsManager({
     required this.ip,
+    required this.isar,
   });
 
+  ///Isar reference.
+  Isar isar;
+
+  ///IP address.
   String ip;
 
   ///Tempkey for new device.
@@ -20,7 +26,7 @@ class WsManager with ChangeNotifier {
   int validTime = 20;
 
   ///List of all connected clients.
-  final List<ServerClient> clients = [];
+  final List<WsClient> clients = [];
 
   ///The ws server.
   HttpServer? wsServer;
@@ -59,9 +65,10 @@ class WsManager with ChangeNotifier {
   ///Add a newly connected client.
   addClient(HttpRequest request, String username) async {
     WebSocket ws = await WebSocketTransformer.upgrade(request);
-    ServerClient serverClient = ServerClient(
+    WsClient serverClient = WsClient(
       serverManager: this,
-      session: request.session,
+      isar: isar,
+      httpSession: request.session,
       ws: ws,
       username: username,
     );
@@ -70,7 +77,7 @@ class WsManager with ChangeNotifier {
   }
 
   ///Remove a client.
-  removeClient(ServerClient serverClient) {
+  removeClient(WsClient serverClient) {
     clients.remove(serverClient);
     notifyListeners();
   }

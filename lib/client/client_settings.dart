@@ -23,7 +23,7 @@ String deviceUIDPPref = 'deviceUIDPPref';
 String? uniqueKey;
 String uniqueKeyPref = 'uniqueKeyPref';
 
-Future<void> loadAppSettings() async {
+Future<void> loadAppNetworkSettings() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   serverIP = prefs.getString(serverIPPref);

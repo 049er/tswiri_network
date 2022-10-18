@@ -33,17 +33,13 @@ dependencies:
     sdk: flutter
   
   tswiri_widgets:
-    git:
-      url: https://github.com/TswiriSoftware/tswiri_widgets.git
-      ref: master 
+    path: ../../../tswiri_widgets/
 
   tswiri_network:
     path: ../../
 
   tswiri_database:
-    git:
-      url: https://github.com/TswiriSoftware/tswiri_database.git
-      ref: master 
+    path: ../../../../
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

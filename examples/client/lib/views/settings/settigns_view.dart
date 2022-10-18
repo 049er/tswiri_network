@@ -2,7 +2,7 @@ import 'package:client/views/qr_code_scanner/qr_code_scanner_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tswiri_network/client/client.dart';
-import 'package:tswiri_network/model/qr_code.dart';
+import 'package:tswiri_network/models/qr_code.dart';
 
 class SettignsView extends StatefulWidget {
   const SettignsView({Key? key}) : super(key: key);

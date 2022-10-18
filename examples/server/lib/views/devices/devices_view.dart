@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tswiri_network/server/server_client.dart';
-import 'package:tswiri_network/server/websocket_server.dart';
+import 'package:tswiri_network/server/websocket/ws_client.dart';
+import 'package:tswiri_network/server/websocket/ws_manager.dart';
 import 'package:tswiri_widgets/colors/colors.dart';
 
 class DevicesView extends StatefulWidget {
@@ -35,7 +35,7 @@ class DevicesViewState extends State<DevicesView> {
         child: ListView.builder(
           itemCount: Provider.of<WsManager>(context).clients.length,
           itemBuilder: (conext, index) {
-            ServerClient serverClient =
+            WsClient serverClient =
                 Provider.of<WsManager>(context).clients[index];
             return Card(
               child: ListTile(
@@ -44,7 +44,7 @@ class DevicesViewState extends State<DevicesView> {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('SID: ${serverClient.session.id}'),
+                    Text('SID: ${serverClient.httpSession.id}'),
                     Text('UID: ${serverClient.deviceUID}'),
                   ],
                 ),

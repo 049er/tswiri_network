@@ -2,15 +2,21 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'package:tswiri_network/server/router.dart';
+import 'package:tswiri_database/export.dart';
+import 'package:tswiri_network/server/shelf/router.dart';
 import 'package:shelf/shelf.dart';
 
 class ShelfManager with ChangeNotifier {
   ShelfManager({
     required this.ip,
+    required this.isar,
   });
 
+  //Ip adress.
   String ip;
+
+  //Reference to the isar database.
+  Isar isar;
 
   ///The shelf server.
   HttpServer? shelfServer;
