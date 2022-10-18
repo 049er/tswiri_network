@@ -94,7 +94,7 @@ class WsClient with ChangeNotifier {
         _handleNewDeviceUID(data);
         break;
       case Post.databaseInfo:
-        String json = data[2];
+        // String json = data[2];
         // DatabaseSync databaseSync = DatabaseSync(isar: isar);
         // databaseSync.databaseHashesFromJson(json);
 
