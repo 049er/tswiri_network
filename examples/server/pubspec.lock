@@ -477,7 +477,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.3"
+    version: "6.0.4"
   qr:
     dependency: transitive
     description:
@@ -633,9 +633,17 @@ packages:
   tswiri_database:
     dependency: "direct main"
     description:
+<<<<<<< HEAD
       path: "../../../.."
       relative: true
     source: path
+=======
+      path: "."
+      ref: master
+      resolved-ref: "15f9fb58ff34e366f72d73bd21526e6150957297"
+      url: "https://github.com/TswiriSoftware/tswiri_database.git"
+    source: git
+>>>>>>> 1124af3375bfc2e13c920547198149d8a5302a39
     version: "0.0.1"
   tswiri_network:
     dependency: "direct main"
