@@ -15,9 +15,7 @@ dependencies:
   shelf_static: ^1.0.0
 
   tswiri_database:
-    git:
-      url: https://github.com/TswiriSoftware/tswiri_database.git
-      ref: isar_update # branch name
+    path: ../tswiri_database
 
 dev_dependencies:
   lints: ^2.0.0
