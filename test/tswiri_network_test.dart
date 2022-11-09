@@ -1,6 +1,3 @@
-import 'package:tswiri_network/tswiri_network.dart';
-import 'package:test/test.dart';
-
 void main() {
   // group('A group of tests', () {
   //   final awesome = Awesome();
