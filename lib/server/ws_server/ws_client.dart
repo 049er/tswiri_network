@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:tswiri_database/functions/comparisons/database_comparisons.dart';
+import 'package:tswiri_database/tswiri_database.dart';
 import 'package:tswiri_network/events/posts.dart';
 import 'package:tswiri_network/events/requests.dart';
-import 'package:tswiri_network/server/ws_server/ws_Manager.dart';
+import 'package:tswiri_network/server/ws_server/ws_manager.dart';
 
 class WsClient {
   //Websocket
@@ -60,7 +62,7 @@ class WsClient {
   }
 
   _handlePost(List p) {
-    print('Post: ' + p.toString());
+    // print('Post: ' + p.toString());
     Posts post = Posts.values.byName(p[1]);
     switch (post) {
       case Posts.deviceUID:
@@ -71,8 +73,14 @@ class WsClient {
         r.requestDatabaseInfo();
 
         break;
-      case Posts.databaseInfo:
-        print(p[2]);
+      case Posts.databaseHash:
+        DatabaseCompare compare = DatabaseCompare(
+          thisDatabase: databaseHashes,
+          otherDatabase: decodeJsonDatabase(p[2]),
+        );
+
+        compare.printResults();
+
         break;
       default:
     }
