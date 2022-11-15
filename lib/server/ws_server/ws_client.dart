@@ -52,7 +52,7 @@ class WsClient {
   }
 
   _handleRequest(List r) {
-    print('Request: ' + r.toString());
+    print('Request: $r');
     Requests request = Requests.values.byName(r[1]);
     switch (request) {
       case Requests.deviceUID:
